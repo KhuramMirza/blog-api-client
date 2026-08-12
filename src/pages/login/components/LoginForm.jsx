@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate, useRevalidator } from "react-router";
 import { toast } from "sonner";
+
 import { loginsSchema } from "../../../schemas/loginSchema.js";
 import { loginUser } from "../../../api/loginApi.js";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const revalidator = useRevalidator();
   const {
     register,
     handleSubmit,
@@ -17,6 +21,8 @@ const LoginForm = () => {
       const result = await loginUser(data);
       toast.success(result?.message);
       reset();
+      navigate("/dashboard", { replace: true });
+      await revalidator.revalidate();
     } catch (error) {
       const message = error.response?.data?.message || "Something went wrong";
       toast.error(message);

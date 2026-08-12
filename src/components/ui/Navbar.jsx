@@ -1,44 +1,22 @@
 import { Link, useRouteLoaderData } from "react-router";
 
-const navLinks = [
-  {
-    to: "/",
-    title: "Home",
-  },
-];
+import NavLinks from "./NavLinks.jsx";
+import UserMenu from "./UserMenu.jsx";
+import AuthLinks from "./AuthLink.jsx";
 
 const Navbar = () => {
   const user = useRouteLoaderData("root");
 
   return (
-    <nav className="flex h-[7%] w-full items-center justify-center gap-2 bg-purple-500">
-      {navLinks.map((link) => (
-        <Link
-          key={link.title}
-          to={link.to}
-          className="px-2 py-1 font-semibold text-slate-900"
-        >
-          {link.title}
-        </Link>
-      ))}
+    <nav className="flex h-[7%] w-full items-center justify-between bg-purple-500 px-6 py-2 shadow-md">
+      <Link to="/" className="text-lg font-bold text-white">
+        My Blog
+      </Link>
 
-      {user ? (
-        <span className="px-2 py-1 font-semibold text-slate-900">
-          Welcome, {user.name}
-        </span>
-      ) : (
-        <>
-          <Link to="/login" className="px-2 py-1 font-semibold text-slate-900">
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="px-2 py-1 font-semibold text-slate-900"
-          >
-            Register
-          </Link>
-        </>
-      )}
+      <div className="flex items-center gap-2">
+        <NavLinks />
+        {user ? <UserMenu user={user} /> : <AuthLinks />}
+      </div>
     </nav>
   );
 };
