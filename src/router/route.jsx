@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
 
-import { getUserOrNull } from "../utils/getUserOrNull.js";
-import { redirectIfLoggedIn } from "../utils/redirectIfLoggedIn.js";
-import { requireAuth } from "../utils/requireAuth.js";
+import { getUserOrNull } from "../features/auth/utils/getUserOrNull.js";
+import { redirectIfLoggedIn } from "../features/auth/utils/redirectIfLoggedIn.js";
+import { requireAuth } from "../features/auth/utils/requireAuth.js";
 
 import Layout from "../components/Layout.jsx";
 import Home from "../pages/home/Home.jsx";

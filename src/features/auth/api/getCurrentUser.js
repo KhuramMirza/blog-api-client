@@ -1,4 +1,4 @@
-import api from "./axios.js";
+import api from "../../../lib/axios.js";
 
 export const getCurrentUser = async () => {
   const response = await api.get("/auth/me");

@@ -1,5 +1,5 @@
 import { UserCircle } from "lucide-react";
-import LogoutButton from "./LogoutButton.jsx";
+import LogoutButton from "../../features/auth/components/LogoutButton.jsx";
 
 const UserMenu = ({ user }) => (
   <div className="flex items-center gap-3">

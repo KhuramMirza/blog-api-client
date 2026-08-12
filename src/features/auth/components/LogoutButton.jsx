@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useRevalidator } from "react-router";
 import { LogOut, Loader2 } from "lucide-react";
 
-import { logoutUser } from "../../api/logoutApi.js";
+import { logoutUser } from "../api/logoutApi.js";
 
 const LogoutButton = () => {
   const navigate = useNavigate();

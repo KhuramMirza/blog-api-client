@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
-import { registerApi } from "../../../api/registerApi.js";
-import { registerSchema } from "../../../schemas/registerSchema.js";
+import { registerUser } from "../api/registerUser.js";
+import { registerSchema } from "../schemas/registerSchema.js";
 
 const RegisterForm = () => {
   const {
@@ -15,7 +15,7 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const result = await registerApi(data);
+      const result = await registerUser(data);
       toast.success(result?.message);
       reset();
     } catch (error) {
