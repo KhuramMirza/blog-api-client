@@ -1,17 +1,17 @@
 import { Outlet } from "react-router";
 import Navbar from "./ui/Navbar.jsx";
+import Footer from "./ui/Footer.jsx";
 
 function Layout() {
   return (
-    <div className="h-screen bg-slate-900 text-white">
+    <div className="flex min-h-screen flex-col bg-slate-900 text-white">
       <Navbar />
-      <main className="h-[80%]">
+
+      <main className="flex-1">
         <Outlet />
       </main>
 
-      <footer className="h-[10%]">
-        <p>© 2026 My Blog</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
