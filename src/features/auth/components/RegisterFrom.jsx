@@ -4,8 +4,11 @@ import { toast } from "sonner";
 
 import { registerUser } from "../api/registerUser.js";
 import { registerSchema } from "../schemas/registerSchema.js";
+import { useNavigate, useRevalidator } from "react-router";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const revalidator = useRevalidator();
   const {
     register,
     handleSubmit,
@@ -18,6 +21,8 @@ const RegisterForm = () => {
       const result = await registerUser(data);
       toast.success(result?.message);
       reset();
+      navigate("/dashboard", { replace: true });
+      await revalidator.revalidate();
     } catch (error) {
       const message = error.response?.data?.message || "Something went wrong";
       toast.error(message);
