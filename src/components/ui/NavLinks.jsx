@@ -1,4 +1,3 @@
-// components/ui/NavLinks.jsx
 import { Link } from "react-router";
 
 const navLinks = [{ to: "/", title: "Home" }];
@@ -9,7 +8,7 @@ const NavLinks = () => (
       <Link
         key={link.title}
         to={link.to}
-        className="rounded px-3 py-1.5 font-medium text-slate-100 transition-colors hover:bg-purple-600/50"
+        className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
       >
         {link.title}
       </Link>

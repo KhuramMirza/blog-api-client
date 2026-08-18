@@ -31,68 +31,84 @@ const RegisterForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="mt-20 flex w-100 flex-col items-center justify-center rounded-2xl bg-purple-700 px-4 py-10 text-slate-800"
-    >
-      <h1 className="text-3xl font-bold">Register</h1>
-      <div className="w-full">
-        <div className="flex flex-col gap-2 px-2 py-3">
-          <label htmlFor="name" className="text-xl font-semibold">
-            Name
-          </label>
-          <input
-            {...register("name")}
-            placeholder="Please choose a username"
-            className="rounded-2xl bg-white p-2"
-          />
-          {errors.username && (
-            <p className="font-semibold text-red-500">
-              {errors.username.message}
-            </p>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-2 px-2 py-3">
-          <label htmlFor="email" className="text-xl font-semibold">
-            Email
-          </label>
-          <input
-            {...register("email")}
-            placeholder="Please enter you email"
-            className="rounded-2xl bg-white p-2"
-          />
-          {errors.email && (
-            <p className="font-semibold text-red-500">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-2 px-2 py-3">
-          <label htmlFor="password" className="text-xl font-semibold">
-            Password
-          </label>
-          <input
-            {...register("password")}
-            type="password"
-            placeholder="Please enter your password"
-            className="rounded-2xl bg-white p-2"
-          />
-          {errors.password && (
-            <p className="font-semibold text-red-500">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="mt-2 rounded-2xl bg-white px-4 py-2 text-lg font-semibold hover:cursor-pointer"
+    <div className="mx-auto mt-20 w-full max-w-md px-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col rounded-xl border border-slate-700 bg-slate-800 p-8 shadow-xl"
       >
-        {isSubmitting ? "Registering..." : "Register"}
-      </button>
-    </form>
+        <h1 className="mb-6 text-center text-2xl font-bold tracking-tight text-white">
+          Create an Account
+        </h1>
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="name"
+              className="text-sm font-medium text-slate-300"
+            >
+              Name
+            </label>
+            <input
+              {...register("name")}
+              placeholder="Choose a username"
+              className="rounded-lg border border-slate-600 bg-slate-900 p-2.5 text-white placeholder-slate-500 transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
+            />
+            {errors.username && (
+              <p className="text-sm font-medium text-red-400">
+                {errors.username.message}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-slate-300"
+            >
+              Email
+            </label>
+            <input
+              {...register("email")}
+              placeholder="name@example.com"
+              className="rounded-lg border border-slate-600 bg-slate-900 p-2.5 text-white placeholder-slate-500 transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
+            />
+            {errors.email && (
+              <p className="text-sm font-medium text-red-400">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-slate-300"
+            >
+              Password
+            </label>
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="Create a password"
+              className="rounded-lg border border-slate-600 bg-slate-900 p-2.5 text-white placeholder-slate-500 transition-colors focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none"
+            />
+            {errors.password && (
+              <p className="text-sm font-medium text-red-400">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="mt-8 w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {isSubmitting ? "Creating account..." : "Register"}
+        </button>
+      </form>
+    </div>
   );
 };
 
