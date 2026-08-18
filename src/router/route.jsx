@@ -10,6 +10,8 @@ import LoginPage from "../pages/login/LoginPage.jsx";
 import RegisterPage from "../pages/register/RegisterPage.jsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.jsx";
 import PostDetailPage from "../pages/posts/PostDetailPage.jsx";
+import CreatePostPage from "../pages/dashboard/CreatePostPage.jsx";
+import EditPostPage from "../pages/dashboard/EditPostPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,7 @@ const router = createBrowserRouter([
       { path: "login", Component: LoginPage, loader: redirectIfLoggedIn },
       { path: "register", Component: RegisterPage, loader: redirectIfLoggedIn },
       { path: "dashboard", Component: DashboardPage, loader: requireAuth },
+      { path: "dashboard/posts/new", Component: CreatePostPage },
       { path: "posts/:id", Component: PostDetailPage },
     ],
   },
