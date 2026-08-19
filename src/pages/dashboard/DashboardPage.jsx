@@ -1,12 +1,12 @@
-import { useLoaderData, Link } from "react-router";
+import { Link, useRouteLoaderData } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, AlertCircle, Plus, FileText } from "lucide-react";
+import { AlertCircle, FileText, Loader2, Plus } from "lucide-react";
 
 import { getMyPosts } from "../../features/posts/api/getMyPosts.js";
 import PostListItem from "../../features/posts/components/PostListItem";
 
 const DashboardPage = () => {
-  const user = useLoaderData();
+  const user = useRouteLoaderData("dashboard");
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["posts", "mine"],
@@ -49,7 +49,7 @@ const DashboardPage = () => {
           </h1>
           <p className="mt-2 text-slate-400">
             Welcome back,{" "}
-            <span className="font-medium text-slate-300">{user.name}</span>.
+            <span className="font-medium text-slate-300">{user?.name}</span>.
             Manage your posts here.
           </p>
         </div>

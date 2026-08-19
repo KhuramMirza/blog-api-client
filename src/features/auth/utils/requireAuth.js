@@ -6,7 +6,6 @@ export const requireAuth = async () => {
     const res = await getCurrentUser();
     return res.data.user;
   } catch (err) {
-    console.log(err);
     throw redirect("/login");
   }
 };

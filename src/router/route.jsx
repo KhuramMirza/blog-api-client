@@ -23,9 +23,23 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "login", Component: LoginPage, loader: redirectIfLoggedIn },
       { path: "register", Component: RegisterPage, loader: redirectIfLoggedIn },
-      { path: "dashboard", Component: DashboardPage, loader: requireAuth },
-      { path: "dashboard/posts/new", Component: CreatePostPage },
       { path: "posts/:id", Component: PostDetailPage },
+      {
+        path: "dashboard",
+        id: "dashboard",
+        loader: requireAuth,
+        children: [
+          { index: true, Component: DashboardPage },
+          {
+            path: "posts/new",
+            Component: CreatePostPage,
+          },
+          {
+            path: "posts/:id/edit",
+            Component: EditPostPage,
+          },
+        ],
+      },
     ],
   },
 ]);

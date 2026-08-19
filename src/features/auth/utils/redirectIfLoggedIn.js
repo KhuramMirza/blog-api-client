@@ -4,7 +4,7 @@ import { redirect } from "react-router";
 export const redirectIfLoggedIn = async () => {
   try {
     await getCurrentUser();
-    throw redirect("/login");
+    throw redirect("/dashboard");
   } catch (err) {
     if (err instanceof Response) throw err;
     return null;

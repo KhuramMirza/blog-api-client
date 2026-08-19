@@ -9,7 +9,19 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import router from "./router/route.jsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Don't retry failed GET requests automatically
+      retry: false,
+    },
+    mutations: {
+      // Fail immediately on POST/PUT/DELETE if the network is down
+      networkMode: "offlineFirst",
+      retry: false,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
