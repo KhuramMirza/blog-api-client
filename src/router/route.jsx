@@ -1,17 +1,37 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
+import { Loader2 } from "lucide-react";
 
 import { getUserOrNull } from "../features/auth/utils/getUserOrNull.js";
 import { redirectIfLoggedIn } from "../features/auth/utils/redirectIfLoggedIn.js";
 import { requireAuth } from "../features/auth/utils/requireAuth.js";
-
 import Layout from "../components/Layout.jsx";
-import Home from "../pages/home/Home.jsx";
-import LoginPage from "../pages/login/LoginPage.jsx";
-import RegisterPage from "../pages/register/RegisterPage.jsx";
-import DashboardPage from "../pages/dashboard/DashboardPage.jsx";
-import PostDetailPage from "../pages/posts/PostDetailPage.jsx";
-import CreatePostPage from "../pages/dashboard/CreatePostPage.jsx";
-import EditPostPage from "../pages/dashboard/EditPostPage.jsx";
+
+const Home = lazy(() => import("../pages/home/Home.jsx"));
+const LoginPage = lazy(() => import("../pages/login/LoginPage.jsx"));
+const RegisterPage = lazy(() => import("../pages/register/RegisterPage.jsx"));
+const DashboardPage = lazy(
+  () => import("../pages/dashboard/DashboardPage.jsx"),
+);
+const PostDetailPage = lazy(() => import("../pages/posts/PostDetailPage.jsx"));
+const CreatePostPage = lazy(
+  () => import("../pages/dashboard/CreatePostPage.jsx"),
+);
+const EditPostPage = lazy(() => import("../pages/dashboard/EditPostPage.jsx"));
+
+const SuspenseWrapper = ({ children }) => (
+  <Suspense
+    fallback={
+      // Centers the loader on the screen with Tailwind CSS
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-gray-500" />
+      </div>
+    }
+  >
+    {children}
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -20,23 +40,68 @@ const router = createBrowserRouter([
     Component: Layout,
     loader: getUserOrNull,
     children: [
-      { index: true, Component: Home },
-      { path: "login", Component: LoginPage, loader: redirectIfLoggedIn },
-      { path: "register", Component: RegisterPage, loader: redirectIfLoggedIn },
-      { path: "posts/:id", Component: PostDetailPage },
+      {
+        index: true,
+        element: (
+          <SuspenseWrapper>
+            <Home />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "login",
+        element: (
+          <SuspenseWrapper>
+            <LoginPage />
+          </SuspenseWrapper>
+        ),
+        loader: redirectIfLoggedIn,
+      },
+      {
+        path: "register",
+        element: (
+          <SuspenseWrapper>
+            <RegisterPage />
+          </SuspenseWrapper>
+        ),
+        loader: redirectIfLoggedIn,
+      },
+      {
+        path: "posts/:id",
+        element: (
+          <SuspenseWrapper>
+            <PostDetailPage />
+          </SuspenseWrapper>
+        ),
+      },
       {
         path: "dashboard",
         id: "dashboard",
         loader: requireAuth,
         children: [
-          { index: true, Component: DashboardPage },
+          {
+            index: true,
+            element: (
+              <SuspenseWrapper>
+                <DashboardPage />
+              </SuspenseWrapper>
+            ),
+          },
           {
             path: "posts/new",
-            Component: CreatePostPage,
+            element: (
+              <SuspenseWrapper>
+                <CreatePostPage />
+              </SuspenseWrapper>
+            ),
           },
           {
             path: "posts/:id/edit",
-            Component: EditPostPage,
+            element: (
+              <SuspenseWrapper>
+                <EditPostPage />
+              </SuspenseWrapper>
+            ),
           },
         ],
       },
